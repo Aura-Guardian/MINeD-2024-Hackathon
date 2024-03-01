@@ -71,7 +71,6 @@ def ask_question(document_text, question):
     return response.choices[0].message['content'].strip()
 
 
-
 def extract_text_from_image(image):
     return pytesseract.image_to_string(image)
 
@@ -127,42 +126,35 @@ def compute_similarity(query, document_text):
     similarity_scores = cosine_similarity(vectors)
     return similarity_scores
 
-def find_relevant_lines(document_text, answer, threshold=0.5):
+def find_relevant_lines(document_text, answer, threshold=0.25):
     lines = document_text.split('\n')
     similarity_scores = compute_similarity(answer, document_text)
 
     relevant_lines = []
-    for i, score in enumerate(similarity_scores[0][1:]):  # Skip the first score, which is for the query itself
+    for i, score in enumerate(similarity_scores[0][1:]):
         if score > threshold:
             relevant_lines.append({"line_number": i + 1, "similarity_score": score, "line_text": lines[i]})
     return relevant_lines
 
-# Main function
-# def main(file_path, question):
-#     document_text = parse_document(file_path)
-#
-#     # Use document_text, document_text2, document_text3, and image_data for OpenAI queries
-#     answer = ask_question(document_text, question)
-#     # Find the relevant lines in the document where the answer is likely to be
-#     relevant_lines = find_relevant_lines(document_text, answer)
-#
-#     print("Answer:", answer)
-#     print("Relevant Lines:")
-#     for line_info in relevant_lines:
-#         print(f"Line {line_info['line_number']}: Similarity Score - {line_info['similarity_score']:.4f}")
-#         print(f"    {line_info['line_text']}")
-#         print()
-
-
 def main(file_path, question):
     document_text = parse_document(file_path)
     image_data = extract_text_from_images(file_path )
-    buffer_data = {
+    combined_data = {
         "document_text": document_text,
         "image_data": image_data
     }
-    answer = ask_question(buffer_data, question)
-    print("Answer:", answer)
+    answer = ask_question(combined_data, question)
+    relevant_lines = find_relevant_lines(document_text + image_data, answer)
+
+    print("Answer:")
+    print("-" * 50)
+    print(answer)
+    print("\n\nRelevant Lines:")
+    print("-" * 50)
+    for line_info in relevant_lines:
+        print(f"\n👉 Line {line_info['line_number']}: Similarity Score - {line_info['similarity_score']:.4f}")
+        print(f"    {line_info['line_text']}")
+        print("-" * 50)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run python script.")

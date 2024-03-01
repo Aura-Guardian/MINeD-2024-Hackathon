@@ -101,13 +101,6 @@ public class DocumentChatter extends JFrame {
             }
         });
 
-        question.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                question.setText("");
-            }
-        });
-
         executeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -152,7 +145,6 @@ public class DocumentChatter extends JFrame {
             tempScript.setExecutable(true);
 
             String pythonPath = findPythonPath();
-            System.out.println(pythonPath);
 
             ProcessBuilder processBuilder = new ProcessBuilder(pythonPath, tempScript.getAbsolutePath(), location, question);
             processBuilder.redirectErrorStream(true);
@@ -163,6 +155,7 @@ public class DocumentChatter extends JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 executionOutput.append(line + "\n");
+                System.out.println(line);
             }
 
             int exitCode = process.waitFor();
@@ -191,4 +184,5 @@ public class DocumentChatter extends JFrame {
 
         return tempFile;
     }
+
 }
