@@ -10,7 +10,7 @@ The document types which are acceptable by the program:
 * DOC/DOCX (Microsoft Word)
 * PPT/PPTX (Microsoft PowerPoint)
 * Latex (.tex) Files
-
+---
 #### Built with
 ##### Frontend
 - Java (JFrame)
@@ -18,7 +18,7 @@ The document types which are acceptable by the program:
 - Python
 ##### Chat Completion API 
 - OpenAI (GPT)
-
+---
 #### Installation Guide
 *Below are the steps on how to install and setup the application. *
 
@@ -38,17 +38,20 @@ pip install requests
 pip install PyPDF2
 pip install fitz
 pip install PyMuPDF
-pip install pytesseract````
+pip install pytesseract
+```
+
+
 ---
 #### Usage
 *After installation, the following steps must be followed to execute the application.*
 
 1) Open the project folder in IntelliJ IDE.
 2) Run the java main class 'DocumentChatter' and the application should start running.
+3) Provide the input parameter, i.e. the file path (browse) and the question related to the provided document.
+
 Below is the output of main class 'DocumentChatter'
 ![[UI Output.png]]
-
-3) Provide the input parameter, i.e. the file path (browse) and the question related to the provided document.
 
 #### Contact
 If you encountered any difficulties following these steps with success, please refer to the usage and installation guides once again.
