@@ -137,8 +137,12 @@ def find_relevant_lines(document_text, answer, threshold=0.25):
     return relevant_lines
 
 def main(file_path, question):
+    file_extension = os.path.splitext(file_path)[1].lower()
     document_text = parse_document(file_path)
-    image_data = extract_text_from_images(file_path )
+    if file_extension == '.tex':
+        image_data = ""
+    else:
+        image_data = extract_text_from_images(file_path)
     combined_data = {
         "document_text": document_text,
         "image_data": image_data
