@@ -38,8 +38,8 @@ pip install requests
 pip install PyPDF2
 pip install fitz
 pip install PyMuPDF
-pip install pytesseract```
-
+pip install pytesseract````
+---
 #### Usage
 *After installation, the following steps must be followed to execute the application.*
 
