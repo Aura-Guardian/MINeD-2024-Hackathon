@@ -51,7 +51,7 @@ pip install pytesseract
 3) Provide the input parameter, i.e. the file path (browse) and the question related to the provided document.
 
 Below is the output of main class 'DocumentChatter'
-![[UI Output.png]]
+![[UI Output.png]](relative%20path/to/UI Output.png?raw=true "UI Output")
 
 #### Contact
 If you encountered any difficulties following these steps with success, please refer to the usage and installation guides once again.
